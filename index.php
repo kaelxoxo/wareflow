@@ -107,12 +107,12 @@ route('POST', '/settings/password',       fn() => (new SettingsController)->upda
 route('POST', '/settings/categories',     fn() => (new SettingsController)->createCategory());
 route('POST', '/settings/categories/{id}/delete', fn($id) => (new SettingsController)->deleteCategory((int)$id));
 
-// Billing — temporarily disabled
-// route('GET',  '/billing',          fn() => (new BillingController)->index());
-// route('POST', '/billing/checkout', fn() => (new BillingController)->checkout());
-// route('GET',  '/billing/success',  fn() => (new BillingController)->success());
-// route('GET',  '/billing/cancel',   fn() => (new BillingController)->cancel());
-// route('POST', '/billing/portal',   fn() => (new BillingController)->portal());
+// Billing
+route('GET',  '/billing',          fn() => (new BillingController)->index());
+route('POST', '/billing/checkout', fn() => (new BillingController)->checkout());
+route('GET',  '/billing/success',  fn() => (new BillingController)->success());
+route('GET',  '/billing/cancel',   fn() => (new BillingController)->cancel());
+route('POST', '/billing/portal',   fn() => (new BillingController)->portal());
 route('POST', '/billing/webhook',  fn() => (new BillingController)->webhook());
 
 // API routes
