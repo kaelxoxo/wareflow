@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$dev = ($_SERVER['HTTP_HOST'] ?? '') === 'localhost';
+$dev = ($_SERVER['HTTP_HOST'] ?? '') === 'localhost' || getenv('APP_DEBUG') === 'true';
 ini_set('display_errors', $dev ? '1' : '0');
 error_reporting(E_ALL);
 
