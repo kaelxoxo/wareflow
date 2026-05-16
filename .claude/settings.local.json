@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(head *)",
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\xampp\\\\htdocs\\\\warehouse_inventory_management\" | Where-Object { !$_.PSIsContainer } | Select-Object FullName)",
+      "mcp__stitch__get_screen",
+      "Bash(curl -sL \"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzlhMmUwZTQyMjE0NDRiZDY5MzYxYWRiNGY4MjE0N2MwEgsSBxDgktC61xMYAZIBIwoKcHJvamVjdF9pZBIVQhMzODIyMDU1MTk0MTIzODAwNDI2&filename=&opi=89354086\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -e \"CREATE DATABASE IF NOT EXISTS wareflow CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\" 2>&1)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root --password=\"\" -e \"CREATE DATABASE IF NOT EXISTS wareflow CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; SHOW DATABASES;\" 2>&1)",
+      "PowerShell(Get-Service *)",
+      "Bash(python3 *)",
+      "PowerShell(python \"C:\\\\Users\\\\Patrick\\\\.claude\\\\plugins\\\\cache\\\\ui-ux-pro-max-skill\\\\ui-ux-pro-max\\\\2.5.0\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\\\\search.py\" \"warehouse inventory management SaaS dashboard professional clean\" --design-system -p \"Wareflow\" 2>&1)",
+      "PowerShell(python \"C:\\\\Users\\\\Patrick\\\\.claude\\\\plugins\\\\cache\\\\ui-ux-pro-max-skill\\\\ui-ux-pro-max\\\\2.5.0\\\\cli\\\\assets\\\\scripts\\\\search.py\" \"warehouse inventory management SaaS dashboard professional clean\" --design-system -p \"Wareflow\" 2>&1)",
+      "PowerShell(python \"C:\\\\Users\\\\Patrick\\\\.claude\\\\plugins\\\\cache\\\\ui-ux-pro-max-skill\\\\ui-ux-pro-max\\\\2.5.0\\\\cli\\\\assets\\\\scripts\\\\search.py\" \"saas dashboard admin b2b\" --domain color 2>&1; python \"C:\\\\Users\\\\Patrick\\\\.claude\\\\plugins\\\\cache\\\\ui-ux-pro-max-skill\\\\ui-ux-pro-max\\\\2.5.0\\\\cli\\\\assets\\\\scripts\\\\search.py\" \"inventory warehouse dashboard data table\" --domain ux -n 8 2>&1)",
+      "Bash(claude mcp *)",
+      "Bash(php *)",
+      "Bash(C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe *)",
+      "Bash(C:\\\\xampp\\\\php\\\\php.exe *)",
+      "Bash(node *)",
+      "Bash(not exist *)",
+      "Bash(New-Item -ItemType Directory -Force -Path \"C:\\\\xampp\\\\htdocs\\\\warehouse_inventory_management\\\\.impeccable\")",
+      "Bash(Out-Null)",
+      "PowerShell(New-Item *)"
+    ]
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-15T00:00:00Z",
+  "title": "Design System: Wareflow",
+  "extensions": {
+    "colorMeta": {
+      "signal-blue": {
+        "role": "primary",
+        "displayName": "Signal Blue",
+        "canonical": "oklch(42% 0.22 264)",
+        "tonalRamp": ["#000920", "#001a5c", "#002a8a", "#004ac6", "#2563eb", "#3b82f6", "#93c5fd", "#eff4ff"]
+      },
+      "ink-deep": {
+        "role": "neutral-text",
+        "displayName": "Ink Deep",
+        "canonical": "oklch(13% 0.02 250)",
+        "tonalRamp": ["#0f172a", "#1e293b", "#334155", "#475569", "#64748b", "#94a3b8", "#cbd5e1", "#f1f5f9"]
+      },
+      "work-surface": {
+        "role": "neutral-bg",
+        "displayName": "Work Surface",
+        "canonical": "oklch(98% 0.004 220)",
+        "tonalRamp": ["#d0d9e8", "#dde3ed", "#e8edf5", "#eff4ff", "#f1f5f9", "#f8fafc", "#ffffff", "#ffffff"]
+      },
+      "indigo-accent": {
+        "role": "tertiary",
+        "displayName": "Indigo Accent",
+        "canonical": "oklch(44% 0.24 278)",
+        "tonalRamp": ["#13147a", "#1e1f99", "#2d2fb3", "#3e3fcc", "#585be6", "#7b7ef0", "#a5a7f8", "#e1e0ff"]
+      },
+      "error-red": {
+        "role": "error",
+        "displayName": "Error Red",
+        "canonical": "oklch(50% 0.24 27)",
+        "tonalRamp": ["#7f1d1d", "#991b1b", "#b91c1c", "#dc2626", "#ef4444", "#f87171", "#fca5a5", "#ffdad6"]
+      }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "KPI metric values on the dashboard. The largest in-app text. Never in running copy." },
+      "headline": { "displayName": "Headline", "purpose": "Page titles and dashboard welcome header. One per page." },
+      "title":    { "displayName": "Title",    "purpose": "Card section headers, modal titles, sidebar section headings." },
+      "body":     { "displayName": "Body",     "purpose": "All standard UI text, table cell content, form labels. Max 65-75ch in reading contexts." },
+      "label":    { "displayName": "Label",    "purpose": "Table column headers, nav section dividers, badge text. Always uppercase with 0.05em tracking." }
+    },
+    "shadows": [
+      { "name": "card-hover",    "value": "0 4px 6px -1px rgba(0,0,0,.10), 0 2px 4px -2px rgba(0,0,0,.10)", "purpose": "Card hover lift. Signals interactivity; not used at rest." },
+      { "name": "modal-lift",    "value": "0 24px 64px rgba(0,0,0,.15)",                                     "purpose": "Modal. The only large shadow in the system; communicates interruption." },
+      { "name": "button-glow",   "value": "0 4px 14px rgba(0,74,198,.28)",                                   "purpose": "Primary button hover only. Reinforces Signal Blue identity on the primary action." }
+    ],
+    "motion": [
+      { "name": "state-transition", "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default for all state changes: hover, focus, active. Snappy." },
+      { "name": "panel-slide",      "value": "250ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Sidebar mobile open/close. Slightly slower to feel physical." },
+      { "name": "modal-enter",      "value": "200ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Modal slideIn: opacity 0→1, translateY(-10px)→0, scale(.98)→1." },
+      { "name": "entrance-stagger", "value": "550ms cubic-bezier(0.0, 0, 0.2, 1)", "purpose": "Dashboard KPI cards on page load only. Staggered 90ms between cards. Never on routine navigation." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px",  "purpose": "Two-column table columns appear; filter row wraps less." },
+      { "name": "lg", "value": "1024px", "purpose": "Sidebar becomes fixed (not overlay). Third table column appears." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single primary action per screen section. Signal Blue fill.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg> Add Item</button>",
+      "css": ".ds-btn-primary { background: #004ac6; color: #fff; padding: 8px 20px; border-radius: 10px; font-size: 13.5px; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: background 0.15s, box-shadow 0.15s; } .ds-btn-primary:hover { background: #2563eb; box-shadow: 0 4px 14px rgba(0,74,198,.28); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(0,74,198,.30); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Cancel, reset, and non-destructive secondary actions.",
+      "html": "<button class=\"ds-btn-secondary\">Cancel</button>",
+      "css": ".ds-btn-secondary { background: #f1f5f9; color: #334155; padding: 8px 20px; border-radius: 10px; font-size: 13.5px; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; border: 1px solid #e2e8f0; cursor: pointer; transition: background 0.15s; } .ds-btn-secondary:hover { background: #e2e8f0; } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(0,74,198,.18); }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Container for summaries, KPIs, and chart panels. Not for list data.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Low Stock Alerts</h3><p class=\"ds-card-body\">3 items need reorder attention.</p></div>",
+      "css": ".ds-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px; box-shadow: none; transition: box-shadow 0.15s; } .ds-card:hover { box-shadow: 0 4px 6px -1px rgba(0,0,0,.10), 0 2px 4px -2px rgba(0,0,0,.10); } .ds-card-title { font-size: 15px; font-weight: 600; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0 0 6px; } .ds-card-body { font-size: 13.5px; color: #475569; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; line-height: 1.6; }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Inline status and type labels. Six semantic color variants.",
+      "html": "<span class=\"ds-badge ds-badge-active\">Active</span> <span class=\"ds-badge ds-badge-inactive\">Inactive</span> <span class=\"ds-badge ds-badge-warning\">Low Stock</span> <span class=\"ds-badge ds-badge-in\">In</span> <span class=\"ds-badge ds-badge-out\">Out</span> <span class=\"ds-badge ds-badge-transfer\">Transfer</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; } .ds-badge-active { background: #f0fdf4; color: #15803d; } .ds-badge-inactive { background: #f1f5f9; color: #475569; } .ds-badge-warning { background: #fef2f2; color: #dc2626; } .ds-badge-in { background: #f0fdf4; color: #15803d; } .ds-badge-out { background: #fef2f2; color: #dc2626; } .ds-badge-transfer { background: #eff6ff; color: #1d4ed8; }"
+    },
+    {
+      "name": "Role Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "User role labels. Color hierarchy mirrors permission hierarchy.",
+      "html": "<span class=\"ds-role-owner\">Owner</span> <span class=\"ds-role-admin\">Admin</span> <span class=\"ds-role-manager\">Manager</span> <span class=\"ds-role-viewer\">Viewer</span>",
+      "css": ".ds-role-owner, .ds-role-admin, .ds-role-manager, .ds-role-viewer { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; } .ds-role-owner { background: #e1e0ff; color: #3e3fcc; } .ds-role-admin { background: #eff4ff; color: #004ac6; } .ds-role-manager { background: #ecfdf5; color: #065f46; } .ds-role-viewer { background: #f1f5f9; color: #475569; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link-active",
+      "description": "Sidebar nav item in default and active state.",
+      "html": "<nav style=\"background:#fff;padding:8px;border-radius:14px;width:220px;display:flex;flex-direction:column;gap:2px;\"><a href=\"#\" class=\"ds-nav-link ds-nav-active\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/></svg>Dashboard</a><a href=\"#\" class=\"ds-nav-link\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"><path d=\"M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z\"/><path d=\"M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z\"/></svg>Inventory</a><a href=\"#\" class=\"ds-nav-link\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/></svg>Warehouses</a></nav>",
+      "css": ".ds-nav-link { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 500; font-family: 'Plus Jakarta Sans', sans-serif; color: #64748b; text-decoration: none; transition: background 0.15s, color 0.15s; } .ds-nav-link:hover { background: #e8edf5; color: #0f172a; } .ds-nav-active { background: #eff4ff; color: #004ac6; font-weight: 600; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Standard text input with label, focus ring, and placeholder.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-label\">Search</label><div class=\"ds-input-wrap\"><svg class=\"ds-input-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/></svg><input class=\"ds-input\" type=\"text\" placeholder=\"Name or SKU…\" /></div></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 5px; } .ds-label { font-size: 11px; font-weight: 600; color: #475569; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; } .ds-input-wrap { position: relative; } .ds-input-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none; } .ds-input { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 12px 8px 34px; font-size: 13.5px; font-family: 'Plus Jakarta Sans', sans-serif; background: #f1f5f9; color: #0f172a; outline: none; transition: border-color 0.15s, box-shadow 0.15s; } .ds-input:focus { border-color: #004ac6; box-shadow: 0 0 0 3px rgba(0,74,198,.18); } .ds-input::placeholder { color: #94a3b8; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Clear Record",
+    "overview": "Wareflow is designed around a single metaphor: a well-kept logbook. Every number is accurate. Every action is traceable. The interface never calls attention to itself; it calls attention to the data.\n\nThe visual language is a single sans family (Plus Jakarta Sans) at tightly-controlled weights, a cool near-white field, and a single accent color so precise in its placement that it feels authoritative the moment it appears. Signal Blue (#004ac6) is not a decoration; it is a directive.\n\nThis system explicitly rejects two traps: the bloated enterprise (heavy sidebars, 20-column tables, nested modals) and the over-animated startup (skeleton loaders on every panel, entrance choreography on routine navigation).",
+    "keyCharacteristics": [
+      "Single sans typeface; hierarchy through weight and size, not family switching.",
+      "Restrained color: Signal Blue occupies less than 10% of any screen.",
+      "Flat surfaces by default; depth through tonal layers, not shadows.",
+      "Tables for operations data. Cards for summaries and KPIs only.",
+      "Motion limited to state transitions (150-200ms ease-out).",
+      "Full dark mode via CSS class toggle with blue-shifted neutrals."
+    ],
+    "rules": [
+      { "name": "The Signal Rule",           "body": "Signal Blue (#004ac6) is used as a fill on less than 10% of any screen. Its scarcity is its authority.", "section": "colors" },
+      { "name": "The Semantic Color Rule",    "body": "Error Red is reserved for genuine error states and destructive confirmations. Never for decoration.", "section": "colors" },
+      { "name": "The Weight Hierarchy Rule",  "body": "Hierarchy is achieved through weight contrast (400 to 700) and size steps with at least a 1.25 ratio.", "section": "typography" },
+      { "name": "The Mono Exception Rule",    "body": "Monospace is reserved for machine-readable strings: SKUs, reference codes, timestamps. Never for decorative copy.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule",   "body": "Surfaces are flat at rest. Shadows appear only as a response to state (hover, elevation, modal).", "section": "elevation" },
+      { "name": "The Table Rule",             "body": "Operations data belongs in tables, not cards. Cards communicate summaries; tables communicate operations.", "section": "components" }
+    ],
+    "dos": [
+      "Do use Signal Blue only for the primary action, active navigation state, focus rings, and interactive link text.",
+      "Do use tonal surface layers (Card White on Work Surface, Surface Low in table headers) to create depth.",
+      "Do use tables for inventory, stock movements, user lists, and warehouse data.",
+      "Do use Label-tier typography (11px / 600 / uppercase) for all table headers and navigation section dividers.",
+      "Do keep motion to state transitions (150-200ms ease-out). Entrance animations on page-load only.",
+      "Do pair every color-only state signal with a text or icon secondary indicator."
+    ],
+    "donts": [
+      "Don't build nested navigation, collapsible sub-menus, or multi-level breadcrumbs. Never feel like SAP.",
+      "Don't add skeleton loaders or loading placeholders on routine page transitions.",
+      "Don't use gradient text (background-clip: text). Signal Blue is a solid color.",
+      "Don't use border-left greater than 1px as a colored accent stripe on cards or alerts.",
+      "Don't stack shadows. One shadow level per z-index layer.",
+      "Don't show a disabled button where hiding it would better communicate the constraint.",
+      "Don't use identical card grids for list data. Use tables or varied layouts instead.",
+      "Don't open a modal as the first response to a user action if an inline approach exists."
+    ]
+  }
+}
