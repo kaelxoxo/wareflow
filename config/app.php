@@ -14,6 +14,7 @@ define('APP_VERSION', '1.0.0');
 
 // Database — reads .env values or falls back to XAMPP defaults
 define('DB_HOST',    getenv('DB_HOST')    ?: 'localhost');
+define('DB_PORT',    getenv('DB_PORT')    ?: '3306');
 define('DB_NAME',    getenv('DB_NAME')    ?: 'wareflow');
 define('DB_USER',    getenv('DB_USER')    ?: 'root');
 define('DB_PASS',    getenv('DB_PASS')    ?: '');

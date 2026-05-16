@@ -10,7 +10,7 @@ if ($secret !== 'wareflow_migrate_2024') {
 
 try {
     $pdo = new PDO(
-        "mysql:host=" . DB_HOST . ";port=3306;charset=utf8mb4",
+        "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";charset=utf8mb4",
         DB_USER, DB_PASS,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
