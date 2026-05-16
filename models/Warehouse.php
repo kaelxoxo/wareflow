@@ -23,7 +23,7 @@ class Warehouse {
         return DB::insert(
             'INSERT INTO warehouses (tenant_id, name, code, location, capacity, manager_id, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [$tenantId, $d['name'], $d['code'] ?? null, $d['location'] ?? null,
-             (int)($d['capacity'] ?? 0), $d['manager_id'] ?: null, $d['status'] ?? 'active']
+             (int)($d['capacity'] ?? 0), ($d['manager_id'] ?? null) ?: null, $d['status'] ?? 'active']
         );
     }
 
@@ -31,7 +31,7 @@ class Warehouse {
         DB::execute(
             'UPDATE warehouses SET name=?, code=?, location=?, capacity=?, manager_id=?, status=? WHERE id=? AND tenant_id=?',
             [$d['name'], $d['code'] ?? null, $d['location'] ?? null,
-             (int)($d['capacity'] ?? 0), $d['manager_id'] ?: null,
+             (int)($d['capacity'] ?? 0), ($d['manager_id'] ?? null) ?: null,
              $d['status'] ?? 'active', $id, $tenantId]
         );
     }

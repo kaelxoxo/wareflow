@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-ini_set('display_errors', '1');
+$dev = ($_SERVER['HTTP_HOST'] ?? '') === 'localhost';
+ini_set('display_errors', $dev ? '1' : '0');
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/config/app.php';
@@ -106,12 +107,12 @@ route('POST', '/settings/password',       fn() => (new SettingsController)->upda
 route('POST', '/settings/categories',     fn() => (new SettingsController)->createCategory());
 route('POST', '/settings/categories/{id}/delete', fn($id) => (new SettingsController)->deleteCategory((int)$id));
 
-// Billing
-route('GET',  '/billing',          fn() => (new BillingController)->index());
-route('POST', '/billing/checkout', fn() => (new BillingController)->checkout());
-route('GET',  '/billing/success',  fn() => (new BillingController)->success());
-route('GET',  '/billing/cancel',   fn() => (new BillingController)->cancel());
-route('POST', '/billing/portal',   fn() => (new BillingController)->portal());
+// Billing — temporarily disabled
+// route('GET',  '/billing',          fn() => (new BillingController)->index());
+// route('POST', '/billing/checkout', fn() => (new BillingController)->checkout());
+// route('GET',  '/billing/success',  fn() => (new BillingController)->success());
+// route('GET',  '/billing/cancel',   fn() => (new BillingController)->cancel());
+// route('POST', '/billing/portal',   fn() => (new BillingController)->portal());
 route('POST', '/billing/webhook',  fn() => (new BillingController)->webhook());
 
 // API routes
