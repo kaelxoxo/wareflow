@@ -1,6 +1,6 @@
 <?php
 // Detect base URL dynamically
-$scheme   = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$scheme   = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https' ? 'https' : 'http';
 $host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
 $script   = $_SERVER['SCRIPT_NAME'] ?? '/warehouse_inventory_management/index.php';
 $basePath = rtrim(dirname($script), '/');
