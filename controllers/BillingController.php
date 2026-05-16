@@ -94,6 +94,23 @@ class BillingController {
 
     public function success(): void {
         Auth::guard('view_inventory');
+        $sessionId = $_GET['session_id'] ?? '';
+        if ($sessionId) {
+            $session = StripeApi::get('/checkout/sessions/' . rawurlencode($sessionId));
+            $tid = Auth::tenantId();
+            if (!empty($session['customer'])) {
+                $tenant = Tenant::find($tid);
+                if (empty($tenant['stripe_customer_id'])) {
+                    Tenant::setStripeCustomer($tid, $session['customer']);
+                }
+            }
+            if (!empty($session['subscription'])) {
+                $sub = StripeApi::get('/subscriptions/' . rawurlencode($session['subscription']));
+                if (!empty($sub['id'])) {
+                    Tenant::updateSubscription($tid, $this->subPayload($sub));
+                }
+            }
+        }
         flash('success', 'Payment received! Your subscription is now active.');
         redirect('/billing');
     }
