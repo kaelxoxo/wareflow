@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,44 +9,82 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: { extend: {
+    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+    colors: {
+      'primary':                  '#004ac6',
+      'on-primary':               '#ffffff',
+      'primary-container':        '#2563eb',
+      'error':                    '#dc2626',
+      'on-surface':               '#0f172a',
+      'on-surface-variant':       '#475569',
+      'surface-container-low':    '#f1f5f9',
+      'outline-variant':          '#cbd5e1',
+    },
+  }}
+}
+</script>
 <style>
 *, ::before, ::after { font-family: 'Plus Jakarta Sans', sans-serif; }
 .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align: -4px; }
-input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,74,198,.2); }
+input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,74,198,.2); }
+
+/* Dark mode overrides */
+.dark body                    { background: #0c1220 !important; }
+.dark .auth-card              { background: #162032 !important; border-color: #243355 !important; }
+.dark input, .dark select     { background: #1a2742 !important; border-color: #243355 !important; color: #e2e8f0 !important; }
+.dark input::placeholder      { color: #64748b; }
 </style>
 </head>
-<body style="background:linear-gradient(135deg,#eef2ff 0%,#f5f7ff 50%,#e8effe 100%); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:1rem;">
+<body class="min-h-screen flex items-center justify-center p-4"
+  style="background:linear-gradient(135deg,#eef2ff 0%,#f5f7ff 50%,#e8effe 100%)">
 
-<div style="width:100%;max-width:420px">
+<div class="w-full max-w-[420px]">
 
   <!-- Logo -->
-  <div style="text-align:center;margin-bottom:28px">
-    <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;background:#004ac6;border-radius:14px;margin-bottom:12px;box-shadow:0 8px 24px rgba(0,74,198,.25)">
-      <span class="material-symbols-outlined" style="color:#fff;font-size:24px">warehouse</span>
+  <div class="text-center mb-7">
+    <div class="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-[14px] mb-3"
+      style="box-shadow:0 8px 24px rgba(0,74,198,.25)">
+      <span class="material-symbols-outlined text-white" style="font-size:24px">warehouse</span>
     </div>
-    <h1 style="font-size:22px;font-weight:800;color:#004ac6;margin:0;letter-spacing:-0.3px">Wareflow</h1>
-    <p style="font-size:13px;color:#64748b;margin:4px 0 0">Smart Warehouse &amp; Inventory Management</p>
+    <h1 class="text-[22px] font-extrabold text-primary tracking-tight leading-none">Wareflow</h1>
   </div>
 
   <!-- Flash -->
   <?php $flash = get_flash(); if ($flash): ?>
-  <div style="margin-bottom:16px;padding:12px 14px;border-radius:12px;font-size:13.5px;display:flex;align-items:center;gap:10px;
-    <?= $flash['type']==='error'
-      ? 'background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;'
-      : 'background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;' ?>">
-    <span class="material-symbols-outlined" style="font-size:18px;flex-shrink:0"><?= $flash['type']==='error' ? 'error' : 'check_circle' ?></span>
+  <div class="mb-4 px-[14px] py-3 rounded-xl text-[13.5px] flex items-center gap-[10px]
+    <?= $flash['type'] === 'error'
+      ? 'bg-red-50 text-red-700 border border-red-200'
+      : 'bg-emerald-50 text-emerald-700 border border-emerald-200' ?>">
+    <span class="material-symbols-outlined flex-shrink-0" style="font-size:18px">
+      <?= $flash['type'] === 'error' ? 'error' : 'check_circle' ?>
+    </span>
     <span><?= $flash['msg'] ?></span>
   </div>
   <?php endif; ?>
 
   <!-- Card -->
-  <div style="background:#fff;border-radius:20px;padding:36px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05),0 20px 40px -8px rgba(0,0,0,.08);border:1px solid #e2e8f0">
+  <div class="auth-card bg-white rounded-[20px] p-9 border border-outline-variant"
+    style="box-shadow:0 4px 6px -1px rgba(0,0,0,.05),0 20px 40px -8px rgba(0,0,0,.08)">
     <?= $content ?>
   </div>
 
-  <p style="text-align:center;font-size:12px;color:#94a3b8;margin-top:20px">
+  <p class="text-center text-xs text-on-surface-variant mt-5">
     &copy; <?= date('Y') ?> Wareflow. All rights reserved.
   </p>
 </div>
+
+<script>
+(function () {
+  var stored = localStorage.getItem('wf_dark');
+  var prefersDark = stored !== null
+    ? stored === '1'
+    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) document.getElementById('html-root').classList.add('dark');
+})();
+</script>
 </body>
 </html>
