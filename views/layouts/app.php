@@ -182,6 +182,12 @@ input:focus, select:focus, textarea:focus {
 .dark .hover\:bg-amber-50:hover { background: rgba(217,119,6,.10)  !important; }
 .dark .hover\:bg-blue-50:hover  { background: rgba(59,130,246,.12) !important; }
 
+/* Dark surface-container hover overrides — without these Tailwind resolves to light defaults */
+.dark .hover\:bg-surface-container-lowest:hover { background: #162032 !important; }
+.dark .hover\:bg-surface-container-low:hover    { background: #1a2742 !important; }
+.dark .hover\:bg-surface-container:hover        { background: #1e2d4e !important; }
+.dark .hover\:bg-surface-container-high:hover   { background: #243355 !important; }
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }

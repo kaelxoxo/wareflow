@@ -20,7 +20,25 @@
       "Bash(not exist *)",
       "Bash(New-Item -ItemType Directory -Force -Path \"C:\\\\xampp\\\\htdocs\\\\warehouse_inventory_management\\\\.impeccable\")",
       "Bash(Out-Null)",
-      "PowerShell(New-Item *)"
+      "PowerShell(New-Item *)",
+      "Bash(xargs grep -l \"billing\\\\|payment\")",
+      "Bash(xargs grep -l \"payment\\\\|billing\")",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -h trolley.proxy.rlwy.net -P 26779 -u root \"-pCwkoqggUfijWNdWGdQiWPVMEWllzKDMQ\" railway \"--execute=source C:/xampp/htdocs/warehouse_inventory_management/sql/schema.sql\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -h trolley.proxy.rlwy.net -P 26779 -u root \"-pCwkoqggUfijWNdWGdQiWPVMEWllzKDMQ\" --default-auth=mysql_native_password railway --execute=\"SELECT 1\")",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git rm *)",
+      "Bash(git update-index *)",
+      "Bash(git -C \"C:\\\\xampp\\\\htdocs\\\\warehouse_inventory_management\" ls-files)",
+      "Bash(git *)",
+      "Bash(Remove-Item *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\xampp\\\\htdocs\\\\warehouse_inventory_management\" -Recurse -Name -Include \"*.php\")",
+      "Bash(Select-Object -First 30)",
+      "PowerShell([System.Environment]::GetEnvironmentVariable\\('DB_HOST', 'Machine'\\); [System.Environment]::GetEnvironmentVariable\\('DB_HOST', 'User'\\); [System.Environment]::GetEnvironmentVariable\\('DB_PORT', 'Machine'\\); [System.Environment]::GetEnvironmentVariable\\('DB_PORT', 'User'\\))",
+      "PowerShell(Get-ChildItem Env: | Where-Object { $_.Name -match \"DB_|MYSQL|RAILWAY|DATABASE\" })",
+      "PowerShell(Get-Content *)"
     ]
   }
 }
