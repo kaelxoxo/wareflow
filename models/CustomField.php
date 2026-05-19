@@ -50,7 +50,13 @@ class CustomField {
     }
 
     public static function saveValues(int $entityId, int $tenantId, array $values): void {
+        // Build a set of field IDs that actually belong to this tenant
+        $rows     = DB::query('SELECT id FROM custom_fields WHERE tenant_id = ?', [$tenantId]);
+        $validIds = array_flip(array_column($rows, 'id'));
+
         foreach ($values as $fieldId => $value) {
+            if (!isset($validIds[(int)$fieldId])) continue; // reject foreign tenant fields
+
             $existing = DB::row(
                 'SELECT id FROM custom_field_values WHERE custom_field_id = ? AND entity_id = ?',
                 [$fieldId, $entityId]

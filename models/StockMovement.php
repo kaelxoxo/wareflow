@@ -52,11 +52,22 @@ class StockMovement {
             $item = DB::row('SELECT * FROM items WHERE id = ? AND tenant_id = ?', [$itemId, $tenantId]);
             if (!$item) throw new Exception('Item not found.');
 
+            // Validate warehouse IDs belong to this tenant before any writes
+            if (!empty($d['to_warehouse_id'])) {
+                $toWh = DB::row('SELECT id FROM warehouses WHERE id = ? AND tenant_id = ?',
+                    [$d['to_warehouse_id'], $tenantId]);
+                if (!$toWh) throw new Exception('Destination warehouse not found.');
+            }
+            if (!empty($d['from_warehouse_id'])) {
+                $fromWh = DB::row('SELECT id FROM warehouses WHERE id = ? AND tenant_id = ?',
+                    [$d['from_warehouse_id'], $tenantId]);
+                if (!$fromWh) throw new Exception('Source warehouse not found.');
+            }
+
             // Update item quantity
             if ($type === 'in') {
                 DB::execute('UPDATE items SET quantity = quantity + ? WHERE id = ? AND tenant_id = ?',
                     [$qty, $itemId, $tenantId]);
-                // Update warehouse_id if provided
                 if (!empty($d['to_warehouse_id'])) {
                     DB::execute('UPDATE items SET warehouse_id = ? WHERE id = ? AND tenant_id = ?',
                         [$d['to_warehouse_id'], $itemId, $tenantId]);
@@ -66,8 +77,10 @@ class StockMovement {
                 DB::execute('UPDATE items SET quantity = quantity - ? WHERE id = ? AND tenant_id = ?',
                     [$qty, $itemId, $tenantId]);
             } elseif ($type === 'transfer') {
-                if ($item['quantity'] < $qty) throw new Exception('Insufficient stock for transfer.');
-                DB::execute('UPDATE items SET warehouse_id = ?, quantity = quantity WHERE id = ? AND tenant_id = ?',
+                if (empty($d['to_warehouse_id'])) throw new Exception('Destination warehouse is required for a transfer.');
+                if ($item['quantity'] < $qty)     throw new Exception('Insufficient stock for transfer.');
+                // Transfers change warehouse location only; total quantity is unchanged
+                DB::execute('UPDATE items SET warehouse_id = ? WHERE id = ? AND tenant_id = ?',
                     [$d['to_warehouse_id'], $itemId, $tenantId]);
             } elseif ($type === 'adjustment') {
                 $newQty = (int)$d['new_quantity'];

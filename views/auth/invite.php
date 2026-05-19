@@ -1,9 +1,13 @@
 <h2 class="text-xl font-bold text-gray-900 mb-1">Accept your invitation</h2>
-<p class="text-sm text-[#434655] mb-6">You've been invited as <strong><?= e($invitedUser['role']) ?></strong></p>
+<p class="text-sm text-[#434655] mb-1">
+  You've been invited to join <strong><?= e($tenant['name'] ?? 'this workspace') ?></strong> as
+  <strong><?= e($invitedUser['role']) ?></strong>.
+</p>
+<p class="text-xs text-[#8b8fa8] mb-6">Invite sent to <?= e($invitedUser['email']) ?></p>
 
 <form method="POST" action="<?= url('/invite/accept') ?>">
   <?= csrf_field() ?>
-  <input type="hidden" name="token" value="<?= e($_GET['token'] ?? basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) ?>">
+  <input type="hidden" name="token" value="<?= e($invitedUser['invite_token']) ?>">
 
   <div class="space-y-4">
     <div>
@@ -13,19 +17,20 @@
     </div>
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1.5">Your name</label>
-      <input type="text" name="name" required
+      <input type="text" name="name" required maxlength="100"
+        value="<?= old('name') ?>"
         class="w-full border border-[#c3c6d7] rounded-xl px-4 py-2.5 text-sm bg-[#f8f9ff] focus:border-[#004ac6]"
         placeholder="Full name"/>
     </div>
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1.5">Create password</label>
-      <input type="password" name="password" required minlength="8"
+      <input type="password" name="password" required minlength="8" maxlength="128"
         class="w-full border border-[#c3c6d7] rounded-xl px-4 py-2.5 text-sm bg-[#f8f9ff] focus:border-[#004ac6]"
         placeholder="Min. 8 characters"/>
     </div>
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1.5">Confirm password</label>
-      <input type="password" name="password_confirm" required
+      <input type="password" name="password_confirm" required maxlength="128"
         class="w-full border border-[#c3c6d7] rounded-xl px-4 py-2.5 text-sm bg-[#f8f9ff] focus:border-[#004ac6]"
         placeholder="••••••••"/>
     </div>

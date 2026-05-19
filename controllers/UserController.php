@@ -26,8 +26,12 @@ class UserController {
             flash('error', 'Invalid role.');
             redirect('/users');
         }
-        if (User::byEmail($email, $tid)) {
-            flash('error', 'This email is already a member.');
+        $existing = User::byEmail($email, $tid);
+        if ($existing) {
+            $msg = $existing['status'] === 'invited'
+                ? 'An invite is already pending for this email address.'
+                : 'This email is already a member of this workspace.';
+            flash('error', $msg);
             redirect('/users');
         }
 

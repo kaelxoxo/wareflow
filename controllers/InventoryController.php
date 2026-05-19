@@ -138,17 +138,38 @@ class InventoryController {
             'sku'           => trim($post['sku']           ?? ''),
             'name'          => trim($post['name']          ?? ''),
             'description'   => trim($post['description']   ?? ''),
-            'category_id'   => $post['category_id']        ?? '',
-            'warehouse_id'  => $post['warehouse_id']       ?? '',
+            'category_id'   => ($post['category_id']  ?? '') ?: null,
+            'warehouse_id'  => ($post['warehouse_id'] ?? '') ?: null,
             'quantity'      => (int)($post['quantity']     ?? 0),
             'unit_price'    => (float)($post['unit_price'] ?? 0),
             'reorder_point' => (int)($post['reorder_point']?? 10),
             'unit'          => trim($post['unit']          ?? 'pcs'),
             'status'        => $post['status']             ?? 'active',
         ];
-        if (!$d['sku'])  $errors[] = 'SKU is required.';
-        if (!$d['name']) $errors[] = 'Name is required.';
-        if (Item::skuExists($d['sku'], $tid, $excludeId)) $errors[] = 'SKU already exists.';
+
+        if (!$d['sku'])               $errors[] = 'SKU is required.';
+        if (strlen($d['sku']) > 80)   $errors[] = 'SKU must be 80 characters or less.';
+        if (!$d['name'])              $errors[] = 'Name is required.';
+        if (strlen($d['name']) > 200) $errors[] = 'Name must be 200 characters or less.';
+        if (strlen($d['unit']) > 30)  $errors[] = 'Unit must be 30 characters or less.';
+        if ($d['quantity'] < 0)       $errors[] = 'Quantity cannot be negative.';
+        if ($d['unit_price'] < 0)     $errors[] = 'Unit price cannot be negative.';
+        if (!in_array($d['status'], ['active', 'inactive', 'discontinued']))
+            $errors[] = 'Invalid status.';
+
+        if ($d['sku'] && Item::skuExists($d['sku'], $tid, $excludeId))
+            $errors[] = 'SKU already exists.';
+
+        // Validate foreign keys belong to this tenant
+        if ($d['category_id'] !== null && !Category::find((int)$d['category_id'], $tid)) {
+            $errors[] = 'Selected category is invalid.';
+            $d['category_id'] = null;
+        }
+        if ($d['warehouse_id'] !== null && !Warehouse::find((int)$d['warehouse_id'], $tid)) {
+            $errors[] = 'Selected warehouse is invalid.';
+            $d['warehouse_id'] = null;
+        }
+
         return ['errors' => $errors, 'data' => $d];
     }
 }
