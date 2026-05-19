@@ -405,7 +405,7 @@
           <span class="material-symbols-outlined text-indigo-600" style="font-size:20px">warehouse</span>
         </div>
         <h3 class="font-semibold text-gray-900 mb-2">Multi-Warehouse</h3>
-        <p class="text-sm text-gray-500 leading-relaxed">Manage unlimited warehouses with dedicated managers, location codes, capacity tracking, and utilization meters.</p>
+        <p class="text-sm text-gray-500 leading-relaxed">Manage multiple warehouses with dedicated managers, location codes, capacity tracking, and utilization meters.</p>
       </div>
 
       <!-- Stock Movements: 2 of 6 columns -->
@@ -498,7 +498,7 @@
           </li>
           <li class="flex items-start gap-2.5 text-sm text-gray-600">
             <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
-            Custom fields and full audit trail
+            Custom fields
           </li>
         </ul>
         <a href="<?= url('/register') ?>"
