@@ -37,6 +37,22 @@ input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,74,198,.
 .dark .auth-card              { background: #162032 !important; border-color: #243355 !important; }
 .dark input, .dark select     { background: #1a2742 !important; border-color: #243355 !important; color: #e2e8f0 !important; }
 .dark input::placeholder      { color: #64748b; }
+
+/* Dark mode token overrides — Tailwind CDN resolves custom tokens at build time to light values only */
+.dark .text-on-surface            { color: #e2e8f0 !important; }
+.dark .text-on-surface-variant    { color: #94a3b8 !important; }
+.dark .text-primary               { color: #60a5fa !important; }
+.dark .border-outline-variant     { border-color: #243355 !important; }
+.dark input:focus, .dark select:focus { box-shadow: 0 0 0 3px rgba(96,165,250,.25) !important; }
+.dark .focus\:border-primary:focus    { border-color: #60a5fa !important; }
+
+/* Dark mode flash messages */
+.dark .bg-red-50     { background: #2d1515 !important; }
+.dark .text-red-700  { color: #fca5a5 !important; }
+.dark .border-red-200 { border-color: #7f1d1d !important; }
+.dark .bg-emerald-50  { background: #0c1f16 !important; }
+.dark .text-emerald-700 { color: #6ee7b7 !important; }
+.dark .border-emerald-200 { border-color: #065f46 !important; }
 </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4"
