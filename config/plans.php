@@ -5,6 +5,14 @@ define('PLANS', [
         'cents'           => 0,
         'inventory_limit' => 50,
         'member_limit'    => 3,
+        'features'        => [
+            ['inventory_2', 'Up to 50 inventory items'],
+            ['group',       'Up to 3 team members'],
+            ['warehouse',   'Multi-warehouse support'],
+            ['bar_chart',   'KPI dashboard and charts'],
+            ['tune',        'Custom fields'],
+            ['swap_horiz',  'Stock movement tracking'],
+        ],
     ],
     'pro' => [
         'name'            => 'Pro',

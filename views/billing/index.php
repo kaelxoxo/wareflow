@@ -2,12 +2,13 @@
 $title      = 'Billing';
 $status     = $tenant['subscription_status'] ?? 'none';
 $periodEnd  = $tenant['subscription_period_end'] ?? null;
-$isActive   = in_array($status, ['active', 'trialing']);
-$isPastDue  = $status === 'past_due';
-$isCanceled = in_array($status, ['canceled', 'none', 'unpaid']);
 $planKey    = $tenant['plan'] ?? 'starter';
 $planConfig = PLANS[$planKey] ?? PLANS['starter'];
 $planName   = 'Wareflow ' . $planConfig['name'];
+$isStarter  = ($planKey === 'starter');
+$isActive   = in_array($status, ['active', 'trialing']) || $isStarter;
+$isPastDue  = ($status === 'past_due') && !$isStarter;
+$isCanceled = in_array($status, ['canceled', 'none', 'unpaid']) && !$isStarter;
 ?>
 
 <div class="max-w-3xl mx-auto">
@@ -30,11 +31,12 @@ $planName   = 'Wareflow ' . $planConfig['name'];
         <div>
           <p class="font-semibold text-on-surface text-[15px]"><?= e($planName) ?></p>
           <p class="text-sm text-on-surface-variant mt-0.5">
-            <?php if ($isActive): ?>
-              <?= $status === 'trialing' ? 'Free trial active' : 'Monthly subscription' ?> &mdash;
-              <?= $periodEnd ? 'renews ' . date('M j, Y', strtotime($periodEnd)) : 'active' ?>
+            <?php if ($isStarter): ?>
+              Free plan · upgrade anytime for more capacity.
+            <?php elseif ($isActive): ?>
+              <?= $status === 'trialing' ? 'Free trial active' : 'Monthly subscription' ?> · renews <?= $periodEnd ? date('M j, Y', strtotime($periodEnd)) : 'monthly' ?>
             <?php elseif ($isPastDue): ?>
-              Payment failed &mdash; update your payment method to keep access.
+              Payment failed. Update your payment method to keep access.
             <?php else: ?>
               No active subscription.
             <?php endif; ?>
@@ -42,8 +44,7 @@ $planName   = 'Wareflow ' . $planConfig['name'];
         </div>
       </div>
       <div class="flex-shrink-0">
-        <?php if ($isActive || $isPastDue): ?>
-          <?php if (!empty($tenant['stripe_customer_id'])): ?>
+        <?php if (!$isStarter && ($isActive || $isPastDue) && !empty($tenant['stripe_customer_id'])): ?>
           <form method="POST" action="<?= url('/billing/portal') ?>">
             <?= csrf_field() ?>
             <button type="submit" class="btn-secondary text-sm flex items-center gap-xs">
@@ -51,8 +52,7 @@ $planName   = 'Wareflow ' . $planConfig['name'];
               <?= $isPastDue ? 'Update Payment' : 'Manage Subscription' ?>
             </button>
           </form>
-          <?php endif; ?>
-        <?php else: ?>
+        <?php elseif ($isCanceled): ?>
           <span class="badge bg-surface-container-low text-on-surface-variant">Inactive</span>
         <?php endif; ?>
       </div>
@@ -82,11 +82,11 @@ $planName   = 'Wareflow ' . $planConfig['name'];
     <?php endif; ?>
   </div>
 
-  <?php if ($isCanceled): ?>
-  <!-- Plan picker -->
+  <?php if ($isStarter || $isCanceled): ?>
+  <!-- Plan picker / upgrade upsell -->
   <div class="mb-md">
-    <h2 class="text-[15px] font-semibold text-on-surface mb-xs">Choose a plan</h2>
-    <p class="text-sm text-on-surface-variant">All plans billed monthly. Cancel anytime from the billing portal.</p>
+    <h2 class="text-[15px] font-semibold text-on-surface mb-xs"><?= $isStarter ? 'Upgrade your plan' : 'Choose a plan' ?></h2>
+    <p class="text-sm text-on-surface-variant"><?= $isStarter ? 'Get more SKUs and team members as your operation grows. Billed monthly, cancel anytime.' : 'All plans billed monthly. Cancel anytime from the billing portal.' ?></p>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-md mb-md">

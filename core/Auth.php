@@ -37,7 +37,12 @@ class Auth {
 
     public static function checkSubscription(): void {
         $user   = self::user();
+        $plan   = $user['tenant_plan'] ?? 'starter';
         $status = $user['tenant_subscription_status'] ?? 'none';
+
+        // Starter is the free tier — never requires a Stripe subscription
+        if ($plan === 'starter') return;
+
         if (in_array($status, ['active', 'trialing', 'past_due'])) return;
 
         if (self::role() === 'owner') {
