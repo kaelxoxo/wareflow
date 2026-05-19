@@ -138,7 +138,7 @@
   height:2px;
   background:linear-gradient(90deg,transparent,#3b82f6,transparent);
   animation:underline-grow 2s ease-out forwards;
-  animation-delay:2.8s;
+  animation-delay:1.0s;
 }
 
 /* Feature card reveal */
@@ -199,6 +199,8 @@
         <span id="nav-logo" class="font-bold text-lg transition-colors duration-300">Wareflow</span>
       </a>
       <div class="flex items-center gap-3">
+        <a href="#pricing" id="nav-pricing"
+          class="text-sm font-medium transition-colors duration-300 hover:opacity-80 px-2 py-1 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">Pricing</a>
         <a href="<?= url('/login') ?>" id="nav-signin"
           class="text-sm font-medium transition-colors duration-300 hover:opacity-80 px-2 py-1 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">Sign in</a>
         <a href="<?= url('/register') ?>"
@@ -266,9 +268,9 @@
     <div class="flex items-center justify-center gap-3 mb-4">
       <div class="w-8 h-px bg-gradient-to-r from-transparent to-blue-400 opacity-50" aria-hidden="true"></div>
       <p class="text-xs font-mono font-light text-blue-300 uppercase tracking-[.22em]">
-        <span class="word-animate" data-delay="0">Multi-tenant.</span>
-        <span class="word-animate" data-delay="250">Multi-warehouse.</span>
-        <span class="word-animate" data-delay="500">Real-time.</span>
+        <span class="word-animate" data-delay="0">Private workspace.</span>
+        <span class="word-animate" data-delay="160">Multi-warehouse.</span>
+        <span class="word-animate" data-delay="320">Real-time.</span>
       </p>
       <div class="w-8 h-px bg-gradient-to-l from-transparent to-blue-400 opacity-50" aria-hidden="true"></div>
     </div>
@@ -283,32 +285,33 @@
 
     <h1 class="font-extralight leading-tight tracking-tight text-white">
       <div class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3">
-        <span class="word-animate" data-delay="700">Warehouse</span>
-        <span class="word-animate underline-accent" data-delay="900">Intelligence.</span>
+        <span class="word-animate" data-delay="300">Inventory</span>
+        <span class="word-animate underline-accent" data-delay="400">ops,</span>
       </div>
       <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin text-blue-200 mb-6">
-        <span class="word-animate" data-delay="1200">Redefined.</span>
+        <span class="word-animate" data-delay="500">under</span>
+        <span class="word-animate" data-delay="600">control.</span>
       </div>
       <div class="text-base sm:text-lg md:text-xl font-light text-blue-300/80 max-w-2xl mx-auto leading-relaxed tracking-wide">
-        <span class="word-animate" data-delay="1700">Track</span>
-        <span class="word-animate" data-delay="1850">every</span>
-        <span class="word-animate" data-delay="2000">SKU.</span>
-        <span class="word-animate" data-delay="2200">Control</span>
-        <span class="word-animate" data-delay="2350">every</span>
-        <span class="word-animate" data-delay="2500">location.</span>
-        <span class="word-animate" data-delay="2700">Move</span>
-        <span class="word-animate" data-delay="2850">at</span>
-        <span class="word-animate" data-delay="3000">the</span>
-        <span class="word-animate" data-delay="3150">speed</span>
-        <span class="word-animate" data-delay="3300">of</span>
-        <span class="word-animate" data-delay="3450">your</span>
-        <span class="word-animate" data-delay="3600">business.</span>
+        <span class="word-animate" data-delay="750">Track</span>
+        <span class="word-animate" data-delay="810">every</span>
+        <span class="word-animate" data-delay="870">SKU.</span>
+        <span class="word-animate" data-delay="950">Control</span>
+        <span class="word-animate" data-delay="1010">every</span>
+        <span class="word-animate" data-delay="1070">location.</span>
+        <span class="word-animate" data-delay="1140">Move</span>
+        <span class="word-animate" data-delay="1190">at</span>
+        <span class="word-animate" data-delay="1240">the</span>
+        <span class="word-animate" data-delay="1290">speed</span>
+        <span class="word-animate" data-delay="1340">of</span>
+        <span class="word-animate" data-delay="1390">your</span>
+        <span class="word-animate" data-delay="1450">business.</span>
       </div>
     </h1>
 
     <!-- CTAs -->
     <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0"
-      style="animation:word-appear 1s ease-out forwards;animation-delay:4.2s">
+      style="animation:word-appear 1s ease-out forwards;animation-delay:1.8s">
       <a href="<?= url('/register') ?>"
         class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#004ac6] text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-[#0053db] shadow-xl shadow-blue-900/40 hover:shadow-2xl hover:shadow-blue-800/50 transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400">
         Start for free
@@ -323,12 +326,12 @@
 
     <!-- Capability pills -->
     <div class="mt-10 flex flex-wrap items-center justify-center gap-6 opacity-0"
-      style="animation:word-appear 1s ease-out forwards;animation-delay:4.8s">
+      style="animation:word-appear 1s ease-out forwards;animation-delay:2.2s">
       <?php $pills = [
-        ['inventory_2', 'Unlimited SKUs'],
-        ['warehouse',   'Multi-warehouse'],
-        ['group',       'Role-based access'],
-        ['tune',        'Custom fields'],
+        ['check_circle', 'Free plan available'],
+        ['warehouse',    'Multi-warehouse'],
+        ['group',        'Role-based access'],
+        ['tune',         'Custom fields'],
       ];
       foreach ($pills as [$icon, $label]): ?>
       <div class="flex items-center gap-1.5 text-blue-300/70 text-xs">
@@ -343,12 +346,12 @@
   <div class="relative z-10 text-center pb-14 md:pb-20">
     <div class="mb-5 w-12 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-25 mx-auto" aria-hidden="true"></div>
     <p class="text-xs font-mono font-light text-blue-300/70 uppercase tracking-[.22em]">
-      <span class="word-animate" data-delay="3800">Observe.</span>
-      <span class="word-animate" data-delay="3980">Control.</span>
-      <span class="word-animate" data-delay="4160">Grow.</span>
+      <span class="word-animate" data-delay="2000">Observe.</span>
+      <span class="word-animate" data-delay="2100">Control.</span>
+      <span class="word-animate" data-delay="2200">Grow.</span>
     </p>
     <div class="mt-8 flex flex-col items-center gap-1.5 opacity-0" aria-hidden="true"
-      style="animation:word-appear 1s ease-out forwards;animation-delay:5.4s">
+      style="animation:word-appear 1s ease-out forwards;animation-delay:2.8s">
       <span class="text-blue-400/50 text-[10px] tracking-widest uppercase font-mono">scroll</span>
       <div class="w-px h-8 bg-gradient-to-b from-blue-400/40 to-transparent animate-pulse"></div>
     </div>
@@ -361,10 +364,10 @@
   <div class="max-w-6xl mx-auto">
 
     <div class="text-center mb-16 reveal-card">
-      <p class="text-xs font-mono text-[#004ac6] uppercase tracking-widest mb-3">Everything you need</p>
-      <h2 id="features-heading" class="text-3xl font-bold text-gray-900 mb-4 tracking-tight">Built for operations teams</h2>
+      <p class="text-xs font-mono text-[#004ac6] uppercase tracking-widest mb-3">Everything your team needs</p>
+      <h2 id="features-heading" class="text-3xl font-bold text-gray-900 mb-4 tracking-tight">Purpose-built for inventory teams</h2>
       <p class="text-gray-500 max-w-xl mx-auto">
-        Purpose-built features that give your team complete visibility and control, from the stockroom to the boardroom.
+        Every feature you need to track stock, record movements, and keep your team aligned. Nothing you don't.
       </p>
     </div>
 
@@ -432,7 +435,7 @@
           <span class="material-symbols-outlined text-emerald-600" style="font-size:20px">group</span>
         </div>
         <h3 class="font-semibold text-gray-900 mb-2">Users &amp; RBAC</h3>
-        <p class="text-sm text-gray-500 leading-relaxed">Invite teammates with role-based permissions: Owner, Admin, Manager, or read-only Viewer.</p>
+        <p class="text-sm text-gray-500 leading-relaxed">Invite teammates by email with role-based permissions: Owner, Admin, Manager, or Viewer. Invite links expire in 7 days with clear status for pending, accepted, and revoked requests.</p>
       </div>
 
       <!-- KPI Dashboard: full-width horizontal strip -->
@@ -499,6 +502,131 @@
   </div>
 </section>
 
+<!-- ─── Pricing ──────────────────────────────────────────── -->
+<section class="py-24 px-6 bg-white" id="pricing" aria-labelledby="pricing-heading">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-14 reveal-card">
+      <p class="text-xs font-mono text-[#004ac6] uppercase tracking-widest mb-3">Transparent pricing</p>
+      <h2 id="pricing-heading" class="text-3xl font-bold text-gray-900 mb-4 tracking-tight">Start free. Grow when you're ready.</h2>
+      <p class="text-gray-500 max-w-md mx-auto">No credit card required to start. Upgrade your workspace when your team or inventory outgrows the free tier.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Starter -->
+      <div class="reveal-card p-6 rounded-2xl border border-gray-100 bg-gray-50 flex flex-col group hover:border-[#004ac6]/20 hover:shadow-lg transition-all duration-200"
+        style="transition-delay:0ms">
+        <div class="mb-6">
+          <p class="text-xs font-mono text-gray-400 uppercase tracking-widest mb-2">Starter</p>
+          <p class="text-3xl font-bold text-gray-900">Free</p>
+          <p class="text-sm text-gray-400 mt-1">No credit card needed</p>
+        </div>
+        <ul class="space-y-3 flex-1 mb-8" aria-label="Starter plan features">
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Up to 50 SKUs
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Up to 3 team members
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Multi-warehouse support
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            KPI dashboard
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Custom fields and full audit trail
+          </li>
+        </ul>
+        <a href="<?= url('/register') ?>"
+          class="w-full text-center text-sm font-semibold px-5 py-3 rounded-xl border border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004ac6]">
+          Get started free
+        </a>
+      </div>
+
+      <!-- Pro — featured -->
+      <div class="reveal-card p-6 rounded-2xl border-2 border-[#004ac6] bg-white shadow-xl shadow-blue-900/10 flex flex-col relative transition-all duration-200"
+        style="transition-delay:80ms">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+          <span class="bg-[#004ac6] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Most popular</span>
+        </div>
+        <div class="mb-6">
+          <p class="text-xs font-mono text-[#004ac6] uppercase tracking-widest mb-2">Pro</p>
+          <div class="flex items-baseline gap-1">
+            <p class="text-3xl font-bold text-gray-900">$5</p>
+            <p class="text-sm text-gray-400">/month</p>
+          </div>
+          <p class="text-sm text-gray-400 mt-1">Per workspace, billed monthly</p>
+        </div>
+        <ul class="space-y-3 flex-1 mb-8" aria-label="Pro plan features">
+          <li class="flex items-start gap-2.5 text-sm text-gray-700">
+            <span class="material-symbols-outlined text-[#004ac6] flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Up to 500 SKUs
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-700">
+            <span class="material-symbols-outlined text-[#004ac6] flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Up to 5 team members
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-700">
+            <span class="material-symbols-outlined text-[#004ac6] flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Everything in Starter
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-700">
+            <span class="material-symbols-outlined text-[#004ac6] flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Role-based invite controls
+          </li>
+        </ul>
+        <a href="<?= url('/register') ?>"
+          class="w-full text-center text-sm font-semibold px-5 py-3 rounded-xl bg-[#004ac6] text-white hover:bg-[#0053db] transition-colors shadow-lg shadow-blue-900/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#004ac6]">
+          Start with Pro
+        </a>
+      </div>
+
+      <!-- Max -->
+      <div class="reveal-card p-6 rounded-2xl border border-gray-100 bg-gray-50 flex flex-col group hover:border-[#004ac6]/20 hover:shadow-lg transition-all duration-200"
+        style="transition-delay:160ms">
+        <div class="mb-6">
+          <p class="text-xs font-mono text-gray-400 uppercase tracking-widest mb-2">Max</p>
+          <div class="flex items-baseline gap-1">
+            <p class="text-3xl font-bold text-gray-900">$10</p>
+            <p class="text-sm text-gray-400">/month</p>
+          </div>
+          <p class="text-sm text-gray-400 mt-1">Per workspace, billed monthly</p>
+        </div>
+        <ul class="space-y-3 flex-1 mb-8" aria-label="Max plan features">
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Unlimited SKUs
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Up to 20 team members
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Everything in Pro
+          </li>
+          <li class="flex items-start gap-2.5 text-sm text-gray-600">
+            <span class="material-symbols-outlined text-gray-400 flex-shrink-0 mt-px" style="font-size:15px" aria-hidden="true">check</span>
+            Suitable for larger operations
+          </li>
+        </ul>
+        <a href="<?= url('/register') ?>"
+          class="w-full text-center text-sm font-semibold px-5 py-3 rounded-xl border border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004ac6]">
+          Start with Max
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ─── CTA ───────────────────────────────────────────────── -->
 <section class="py-24 px-6 relative overflow-hidden" style="background:linear-gradient(135deg,#001a5c,#004ac6,#0053db)">
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -524,7 +652,7 @@
       Create your workspace
       <span class="material-symbols-outlined" style="font-size:16px" aria-hidden="true">arrow_forward</span>
     </a>
-    <p class="text-blue-300/60 text-xs mt-5">Free forever for small teams. No setup fees.</p>
+    <p class="text-blue-300/60 text-xs mt-5">No credit card required. Upgrade when your team grows.</p>
   </div>
 </section>
 
@@ -595,9 +723,10 @@
   });
 
   // 5. Nav style shift on scroll (transparent on hero → solid on light sections)
-  var nav    = document.getElementById('landing-nav');
-  var logo   = document.getElementById('nav-logo');
-  var signin = document.getElementById('nav-signin');
+  var nav     = document.getElementById('landing-nav');
+  var logo    = document.getElementById('nav-logo');
+  var signin  = document.getElementById('nav-signin');
+  var pricing = document.getElementById('nav-pricing');
   function updateNav() {
     var past = window.scrollY > (window.innerHeight * .85);
     if (past) {
@@ -606,12 +735,14 @@
       nav.style.backdropFilter  = 'blur(12px)';
       logo.style.color          = '#004ac6';
       signin.style.color        = '#475569';
+      pricing.style.color       = '#475569';
     } else {
       nav.style.background      = 'transparent';
       nav.style.borderBottom    = '1px solid transparent';
       nav.style.backdropFilter  = 'none';
       logo.style.color          = 'white';
       signin.style.color        = 'rgba(191,219,254,.9)';
+      pricing.style.color       = 'rgba(191,219,254,.9)';
     }
   }
   updateNav();
