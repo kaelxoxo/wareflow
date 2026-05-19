@@ -459,49 +459,6 @@
   </div>
 </section>
 
-<!-- ─── Product highlights strip ───────────────────────────── -->
-<section class="py-12 px-6 bg-gray-50 border-y border-gray-100" aria-label="Product highlights">
-  <div class="max-w-4xl mx-auto">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-8 sm:gap-0 reveal-card">
-
-      <div class="flex items-start gap-3 sm:flex-1 sm:justify-center">
-        <div class="w-9 h-9 bg-[#eff4ff] rounded-xl flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-[#004ac6]" style="font-size:18px" aria-hidden="true">warehouse</span>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-900">Unlimited locations</p>
-          <p class="text-xs text-gray-500 mt-0.5">One workspace, any number of warehouses</p>
-        </div>
-      </div>
-
-      <div class="hidden sm:block w-px h-10 bg-gray-200 flex-shrink-0" aria-hidden="true"></div>
-
-      <div class="flex items-start gap-3 sm:flex-1 sm:justify-center">
-        <div class="w-9 h-9 bg-[#eff4ff] rounded-xl flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-[#004ac6]" style="font-size:18px" aria-hidden="true">verified</span>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-900">Full audit trail</p>
-          <p class="text-xs text-gray-500 mt-0.5">Every movement recorded and traceable</p>
-        </div>
-      </div>
-
-      <div class="hidden sm:block w-px h-10 bg-gray-200 flex-shrink-0" aria-hidden="true"></div>
-
-      <div class="flex items-start gap-3 sm:flex-1 sm:justify-center">
-        <div class="w-9 h-9 bg-[#eff4ff] rounded-xl flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-[#004ac6]" style="font-size:18px" aria-hidden="true">bolt</span>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-900">Always live</p>
-          <p class="text-xs text-gray-500 mt-0.5">KPIs and dashboards update in real time</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ─── Pricing ──────────────────────────────────────────── -->
 <section class="py-24 px-6 bg-white" id="pricing" aria-labelledby="pricing-heading">
   <div class="max-w-6xl mx-auto">
