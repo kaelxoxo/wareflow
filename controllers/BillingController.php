@@ -42,6 +42,13 @@ class BillingController {
         Auth::guard('view_inventory');
         Auth::verifyCsrf();
 
+        $plan = $_POST['plan'] ?? '';
+        if (!isset(PLANS[$plan]) || $plan === 'starter') {
+            flash('error', 'Invalid plan selected.');
+            redirect('/billing');
+        }
+        $planConfig = PLANS[$plan];
+
         $tid    = Auth::tenantId();
         $tenant = Tenant::find($tid);
 
@@ -76,11 +83,12 @@ class BillingController {
             'success_url'                                        => url('/billing/success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url'                                         => url('/billing/cancel'),
             'line_items[0][price_data][currency]'                => 'usd',
-            'line_items[0][price_data][product_data][name]'      => 'Wareflow Pro — Monthly',
-            'line_items[0][price_data][unit_amount]'             => STRIPE_PLAN_CENTS,
+            'line_items[0][price_data][product_data][name]'      => $planConfig['stripe_label'],
+            'line_items[0][price_data][unit_amount]'             => $planConfig['cents'],
             'line_items[0][price_data][recurring][interval]'     => 'month',
             'line_items[0][quantity]'                            => 1,
             'metadata[tenant_id]'                                => $tid,
+            'metadata[plan]'                                     => $plan,
         ]);
 
         if (empty($session['url'])) {
@@ -105,9 +113,10 @@ class BillingController {
                 }
             }
             if (!empty($session['subscription'])) {
-                $sub = StripeApi::get('/subscriptions/' . rawurlencode($session['subscription']));
+                $sub  = StripeApi::get('/subscriptions/' . rawurlencode($session['subscription']));
+                $plan = $session['metadata']['plan'] ?? 'pro';
                 if (!empty($sub['id'])) {
-                    Tenant::updateSubscription($tid, $this->subPayload($sub));
+                    Tenant::updateSubscription($tid, $this->subPayload($sub, null, $plan));
                 }
             }
         }
@@ -164,9 +173,10 @@ class BillingController {
                 if (($obj['mode'] ?? '') === 'subscription') {
                     $tenantId = (int)($obj['metadata']['tenant_id'] ?? 0);
                     $subId    = $obj['subscription'] ?? '';
+                    $plan     = $obj['metadata']['plan'] ?? 'pro';
                     if ($tenantId && $subId) {
                         $sub = StripeApi::get('/subscriptions/' . $subId);
-                        Tenant::updateSubscription($tenantId, $this->subPayload($sub));
+                        Tenant::updateSubscription($tenantId, $this->subPayload($sub, null, $plan));
                     }
                 }
                 break;
@@ -200,16 +210,21 @@ class BillingController {
         $cid    = $sub['customer'] ?? '';
         $tenant = $cid ? Tenant::findByStripeCustomer($cid) : null;
         if (!$tenant) return;
-        Tenant::updateSubscription($tenant['id'], $this->subPayload($sub, $forceStatus));
+        $forcePlan = ($forceStatus === 'canceled') ? 'starter' : null;
+        Tenant::updateSubscription($tenant['id'], $this->subPayload($sub, $forceStatus, $forcePlan));
     }
 
-    private function subPayload(array $sub, ?string $forceStatus = null): array {
-        return [
-            'stripe_subscription_id' => $sub['id'] ?? null,
-            'subscription_status'    => $forceStatus ?? ($sub['status'] ?? 'none'),
+    private function subPayload(array $sub, ?string $forceStatus = null, ?string $forcePlan = null): array {
+        $payload = [
+            'stripe_subscription_id'  => $sub['id'] ?? null,
+            'subscription_status'     => $forceStatus ?? ($sub['status'] ?? 'none'),
             'subscription_period_end' => isset($sub['current_period_end'])
                 ? date('Y-m-d H:i:s', (int)$sub['current_period_end']) : null,
         ];
+        if ($forcePlan !== null) {
+            $payload['plan'] = $forcePlan;
+        }
+        return $payload;
     }
 
     private function verifySignature(string $payload, string $sigHeader, string $secret): bool {

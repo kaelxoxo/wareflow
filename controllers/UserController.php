@@ -31,6 +31,13 @@ class UserController {
             redirect('/users');
         }
 
+        $tenant  = Tenant::find($tid);
+        $planCfg = PLANS[$tenant['plan'] ?? 'starter'] ?? PLANS['starter'];
+        if (Tenant::memberCount($tid) >= $planCfg['member_limit']) {
+            flash('error', "Your {$planCfg['name']} plan allows up to {$planCfg['member_limit']} team members. Upgrade your plan to invite more.");
+            redirect('/users');
+        }
+
         $result = User::invite($tid, $email, $role);
         $inviteLink = url('/invite/' . $result['token']);
         ActivityLog::log($tid, Auth::id(), 'user.invited', 'user', $result['id'], ['email' => $email, 'role' => $role]);

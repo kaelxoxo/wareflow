@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/config/stripe.php';
+require_once __DIR__ . '/config/plans.php';
 require_once __DIR__ . '/core/DB.php';
 require_once __DIR__ . '/core/Auth.php';
 require_once __DIR__ . '/core/helpers.php';

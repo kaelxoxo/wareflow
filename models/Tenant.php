@@ -19,10 +19,23 @@ class Tenant {
     }
 
     public static function updateSubscription(int $id, array $d): void {
-        DB::execute(
-            'UPDATE tenants SET stripe_subscription_id = ?, subscription_status = ?, subscription_period_end = ? WHERE id = ?',
-            [$d['stripe_subscription_id'] ?? null, $d['subscription_status'] ?? 'none', $d['subscription_period_end'] ?? null, $id]
-        );
+        $sql    = 'UPDATE tenants SET stripe_subscription_id = ?, subscription_status = ?, subscription_period_end = ?';
+        $params = [$d['stripe_subscription_id'] ?? null, $d['subscription_status'] ?? 'none', $d['subscription_period_end'] ?? null];
+        if (array_key_exists('plan', $d)) {
+            $sql .= ', plan = ?';
+            $params[] = $d['plan'];
+        }
+        $sql .= ' WHERE id = ?';
+        $params[] = $id;
+        DB::execute($sql, $params);
+    }
+
+    public static function itemCount(int $id): int {
+        return (int)DB::scalar('SELECT COUNT(*) FROM items WHERE tenant_id = ?', [$id]);
+    }
+
+    public static function memberCount(int $id): int {
+        return (int)DB::scalar("SELECT COUNT(*) FROM users WHERE tenant_id = ? AND status IN ('active','invited')", [$id]);
     }
 
     public static function findByStripeCustomer(string $customerId): ?array {

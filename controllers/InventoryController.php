@@ -64,6 +64,13 @@ class InventoryController {
             redirect('/inventory/create');
         }
 
+        $tenant  = Tenant::find($tid);
+        $planCfg = PLANS[$tenant['plan'] ?? 'starter'] ?? PLANS['starter'];
+        if ($planCfg['inventory_limit'] !== null && Tenant::itemCount($tid) >= $planCfg['inventory_limit']) {
+            flash('error', "Your {$planCfg['name']} plan allows up to {$planCfg['inventory_limit']} inventory items. Upgrade your plan to add more.");
+            redirect('/inventory/create');
+        }
+
         $id = Item::create($tid, $d, Auth::id());
 
         if (!empty($_POST['custom_fields'])) {
