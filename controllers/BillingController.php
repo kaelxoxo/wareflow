@@ -32,14 +32,23 @@ class StripeApi {
 }
 
 class BillingController {
+    private function requireOwner(): void {
+        Auth::guard();
+        if (Auth::role() !== 'owner') {
+            http_response_code(403);
+            view('errors/403', [], 'app');
+            exit();
+        }
+    }
+
     public function index(): void {
-        Auth::guard('view_inventory');
+        $this->requireOwner();
         $tenant = Tenant::find(Auth::tenantId());
         view('billing/index', compact('tenant'));
     }
 
     public function checkout(): void {
-        Auth::guard('view_inventory');
+        $this->requireOwner();
         Auth::verifyCsrf();
 
         $plan = $_POST['plan'] ?? '';
@@ -101,7 +110,7 @@ class BillingController {
     }
 
     public function success(): void {
-        Auth::guard('view_inventory');
+        $this->requireOwner();
         $sessionId = $_GET['session_id'] ?? '';
         if ($sessionId) {
             $session = StripeApi::get('/checkout/sessions/' . rawurlencode($sessionId));
@@ -125,13 +134,13 @@ class BillingController {
     }
 
     public function cancel(): void {
-        Auth::guard('view_inventory');
+        $this->requireOwner();
         flash('error', 'Checkout cancelled. No charge was made.');
         redirect('/billing');
     }
 
     public function portal(): void {
-        Auth::guard('view_inventory');
+        $this->requireOwner();
         Auth::verifyCsrf();
 
         $tenant = Tenant::find(Auth::tenantId());

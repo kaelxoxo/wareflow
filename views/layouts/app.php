@@ -257,10 +257,12 @@ input:focus, select:focus, textarea:focus {
       <span>Settings</span>
     </a>
     <?php endif; ?>
+    <?php if (Auth::role() === 'owner'): ?>
     <a href="<?= url('/billing') ?>" class="nav-link <?= is_active('/billing') ?>">
       <span class="material-symbols-outlined nav-icon" aria-hidden="true">credit_card</span>
       <span>Billing</span>
     </a>
+    <?php endif; ?>
   </nav>
 
   <!-- User footer -->
@@ -327,6 +329,23 @@ input:focus, select:focus, textarea:focus {
       <?php endif; ?>
     </div>
   </header>
+
+  <!-- Past-due subscription banner -->
+  <?php if ((Auth::user()['tenant_subscription_status'] ?? '') === 'past_due'): ?>
+  <div class="px-xl pt-lg">
+    <div class="flex items-center gap-sm px-md py-3 bg-amber-50 border border-amber-200 rounded-xl dark:bg-amber-900/10 dark:border-amber-700/30">
+      <span class="material-symbols-outlined text-amber-600 dark:text-amber-400 flex-shrink-0" style="font-size:17px">warning</span>
+      <p class="text-sm text-amber-800 dark:text-amber-300 flex-1">
+        Your last payment failed. Access may be restricted soon.
+        <?php if (Auth::role() === 'owner'): ?>
+          <a href="<?= url('/billing') ?>" class="font-semibold underline">Update payment method &rarr;</a>
+        <?php else: ?>
+          Please contact your workspace owner.
+        <?php endif; ?>
+      </p>
+    </div>
+  </div>
+  <?php endif; ?>
 
   <!-- Flash message -->
   <?php $flash = get_flash(); if ($flash): ?>

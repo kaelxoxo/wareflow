@@ -26,6 +26,26 @@ class Auth {
             view('errors/403', [], 'app');
             exit();
         }
+        // Skip subscription check on billing and logout routes
+        $raw  = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+        $base = rtrim(BASE_PATH, '/');
+        $rel  = '/' . ltrim(substr($raw, strlen($base)), '/');
+        if (!str_starts_with($rel, '/billing') && $rel !== '/logout') {
+            self::checkSubscription();
+        }
+    }
+
+    public static function checkSubscription(): void {
+        $user   = self::user();
+        $status = $user['tenant_subscription_status'] ?? 'none';
+        if (in_array($status, ['active', 'trialing', 'past_due'])) return;
+
+        if (self::role() === 'owner') {
+            flash('error', 'Your subscription is inactive. Subscribe to continue using Wareflow.');
+            redirect('/billing');
+        }
+        view('errors/subscription', [], 'app');
+        exit();
     }
 
     public static function check(): bool {
@@ -37,7 +57,8 @@ class Auth {
         static $cached = null;
         if ($cached) return $cached;
         $cached = DB::row(
-            'SELECT u.*, t.name AS tenant_name, t.slug AS tenant_slug, t.plan AS tenant_plan
+            'SELECT u.*, t.name AS tenant_name, t.slug AS tenant_slug, t.plan AS tenant_plan,
+                    t.subscription_status AS tenant_subscription_status
              FROM users u JOIN tenants t ON t.id = u.tenant_id
              WHERE u.id = ? AND u.tenant_id = ? AND u.status = "active"',
             [self::id(), self::tenantId()]
