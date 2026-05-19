@@ -63,21 +63,11 @@
       style="animation:slideUpFade .8s ease-out forwards;animation-delay:1.6s"/>
   </svg>
 
-  <div class="relative z-10 flex items-center justify-between flex-wrap gap-4">
-    <div>
-      <h1 class="text-[22px] font-bold text-white tracking-tight leading-tight">
-        Welcome back, <span class="text-blue-200"><?= e(Auth::user()['name']) ?></span>
-      </h1>
-      <p class="text-sm text-blue-200/60 mt-1"><?= number_format($kpis['total_items']) ?> SKUs across <?= $kpis['active_warehouses'] ?> warehouse<?= $kpis['active_warehouses'] != 1 ? 's' : '' ?></p>
-    </div>
-    <div class="flex items-center gap-sm">
-      <?php if ($kpis['low_stock'] > 0): ?>
-      <a href="<?= url('/inventory?low_stock=1') ?>" class="flex items-center gap-xs bg-red-500/20 text-red-200 border border-red-400/30 px-3 py-1.5 rounded-lg text-xs font-semibold backdrop-blur-sm hover:bg-red-500/30 transition-colors">
-        <span class="material-symbols-outlined" style="font-size:14px">warning</span>
-        <?= $kpis['low_stock'] ?> low stock alert<?= $kpis['low_stock'] > 1 ? 's' : '' ?>
-      </a>
-      <?php endif; ?>
-    </div>
+  <div class="relative z-10">
+    <h1 class="text-[22px] font-bold text-white tracking-tight leading-tight">
+      Welcome back, <span class="text-blue-200"><?= e(Auth::user()['name']) ?></span>
+    </h1>
+    <p class="text-sm text-blue-200/60 mt-1"><?= date('l, j F Y') ?></p>
   </div>
 </div>
 
