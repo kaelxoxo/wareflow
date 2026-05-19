@@ -2,7 +2,7 @@
 class Tenant {
     public static function create(string $name): string {
         $slug = self::slug($name);
-        return DB::insert('INSERT INTO tenants (name, slug) VALUES (?, ?)', [$name, $slug]);
+        return DB::insert('INSERT INTO tenants (name, slug, plan) VALUES (?, ?, ?)', [$name, $slug, 'starter']);
     }
 
     public static function find(int $id): ?array {

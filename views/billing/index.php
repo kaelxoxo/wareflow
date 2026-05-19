@@ -2,7 +2,7 @@
 $title      = 'Billing';
 $status     = $tenant['subscription_status'] ?? 'none';
 $periodEnd  = $tenant['subscription_period_end'] ?? null;
-$planKey    = $tenant['plan'] ?? 'starter';
+$planKey    = !empty($tenant['plan']) ? $tenant['plan'] : 'starter';
 $planConfig = PLANS[$planKey] ?? PLANS['starter'];
 $planName   = 'Wareflow ' . $planConfig['name'];
 $isStarter  = ($planKey === 'starter');
