@@ -44,8 +44,9 @@ class UserController {
 
         $result = User::invite($tid, $email, $role);
         $inviteLink = url('/invite/' . $result['token']);
+        $safeLink = htmlspecialchars($inviteLink, ENT_QUOTES, 'UTF-8');
         ActivityLog::log($tid, Auth::id(), 'user.invited', 'user', $result['id'], ['email' => $email, 'role' => $role]);
-        flash('success', "Invite sent! Link: <a href=\"{$inviteLink}\" class=\"underline\" target=\"_blank\">Copy link</a>");
+        flash('success', "Invite sent! <button type=\"button\" data-copy=\"{$safeLink}\" onclick=\"navigator.clipboard.writeText(this.dataset.copy).then(()=>{this.textContent='Copied!'})\" class=\"underline font-medium cursor-pointer\">Copy link</button>");
         redirect('/users');
     }
 
